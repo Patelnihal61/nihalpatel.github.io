@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nihal Patel – Web / Full-Stack Developer</title>
+<meta name="description" content="Nihal Patel is a WordPress, PHP and WooCommerce developer and M.Sc. Industrial AI student in Sigmaringen, Germany, looking for a Werkstudent role.">
+<meta property="og:title" content="Nihal Patel – Web / Full-Stack Developer">
+<meta property="og:description" content="WordPress, PHP and WooCommerce developer. M.Sc. Industrial AI student in Sigmaringen, Germany.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F4E9E'/%3E%3Ctext x='32' y='43' font-size='32' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='white'%3ENP%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#fff;--ink:#000;--muted:#333;--blue:#1F4E9E;--line:#c9d6ee;--soft:#eef3fc;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{display:flex;gap:20px;align-items:center;padding:20px 0;flex-wrap:wrap}
+nav a{text-decoration:none;color:var(--ink);font-weight:600}
+nav a:hover{color:var(--blue)}
+nav .sp{flex:1}
+button.t{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.15;margin:0}
+.hero{display:grid;grid-template-columns:1fr 180px;gap:40px;align-items:center;padding:56px 0 40px}
+h1{font-size:clamp(3rem,9vw,5.6rem);color:var(--blue);letter-spacing:-.02em}
+.lead{font-size:1.3rem;margin:18px 0 0;max-width:34em}
+.photo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid var(--blue)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;border:2px solid var(--blue);font-weight:700;text-decoration:none}
+.btn.p{background:var(--blue);color:var(--bg)}
+.path{display:flex;gap:0;margin:8px 0 0;padding:0;list-style:none;border-top:3px solid var(--blue)}
+.path li{flex:1;padding:14px 16px 14px 0;position:relative}
+.path li::before{content:"";position:absolute;top:-9px;left:0;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
+.path b{display:block;margin-top:10px;color:var(--blue)}
+.path span{color:var(--muted);font-size:.95rem}
+section{padding:56px 0 8px}
+h2{font-size:2rem;color:var(--blue);margin-bottom:22px}
+p{margin:0 0 14px;max-width:42em}
+.row{display:grid;grid-template-columns:190px 1fr;gap:8px 32px;padding:20px 0;border-top:1px solid var(--line)}
+.row h3{font-size:1.15rem}
+.row .d{color:var(--muted);font-size:.95rem}
+.row ul{margin:6px 0 0;padding-left:20px}
+.row li{margin:3px 0}
+.skills .row{padding:14px 0}
+.tag{display:inline-block;margin:0 8px 6px 0;padding:3px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-size:.92rem}
+.proj .row{grid-template-columns:1fr}
+.proj h3{margin-bottom:4px}
+.note{color:var(--muted);font-size:.95rem;margin-top:16px}
+.contact{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:32px;margin:56px 0 0}
+.contact h2{margin-bottom:10px}
+footer{padding:36px 0 48px;color:var(--muted);font-size:.9rem}
+@media (max-width:700px){
+.hero{grid-template-columns:1fr;padding-top:24px}.photo{order:-1;width:130px;height:130px}
+.row{grid-template-columns:1fr}.path{flex-direction:column;border-top:0;border-left:3px solid var(--blue)}
+.path li{padding:0 0 18px 22px}.path li::before{top:2px;left:-10px}.path b{margin-top:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Main">
+<a href="#about">About</a><a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+<span class="sp"></span><button class="t" id="theme" type="button" aria-label="Switch colour theme">Dark / light</button>
+</nav>
+
+<header class="hero">
+<div>
+<h1>Nihal Patel</h1>
+<p class="lead">I build fast, responsive WordPress and WooCommerce websites, and I’m now studying Industrial AI in Germany to build smarter ones.</p>
+<div class="cta">
+<a class="btn p" href="mailto:nihalnpatel@gmail.com">Email me</a>
+<a class="btn" href="https://www.linkedin.com/in/nihalnpatel">LinkedIn</a>
+<a class="btn" href="assets/Nihal_Patel_CV.docx" download>Download CV</a>
+</div>
+</div>
+<img class="photo" src="assets/photo.png" alt="Portrait of Nihal Patel" width="180" height="180">
+</header>
+
+<ol class="path" aria-label="Career path">
+<li><b>2024</b><span>Web development intern<br>Technext Solutions</span></li>
+<li><b>2025</b><span>WordPress developer<br>PBM Infotech</span></li>
+<li><b>2026</b><span>M.Sc. Industrial AI<br>Hochschule Albstadt-Sigmaringen</span></li>
+</ol>
+
+<section id="about">
+<h2>About</h2>
+<p>I’m a web developer with over a year of professional experience in WordPress and PHP, and a B.E. in Information Technology from Gujarat Technological University. I have built custom themes and plugins, WooCommerce shops with payment integration, and a Vue.js and PHP application with its own API and database.</p>
+<p>I moved to Sigmaringen in 2026 to study for an M.Sc. in Industrial Artificial Intelligence. I’m looking for a working-student (Werkstudent) role as a Web or Full-Stack Developer in Baden-Württemberg, with full-time availability during semester breaks.</p>
+</section>
+
+<section id="work">
+<h2>Experience</h2>
+<div class="row"><div><h3>WordPress Developer</h3><div class="d">04/2025 – 04/2026<br>PBM Infotech, India</div></div>
+<ul><li>Delivered 10–12 client projects with custom WordPress themes and plugins.</li>
+<li>Built WooCommerce shops and integrated the Razorpay payment gateway.</li>
+<li>Structured content with Advanced Custom Fields so clients can edit their own sites.</li>
+<li>Optimised performance and SEO, and kept sites secure and up to date.</li></ul></div>
+<div class="row"><div><h3>Full-Stack Development Intern</h3><div class="d">01/2025 – 04/2025<br>Technext Solutions, India</div></div>
+<ul><li>Built a Vue.js front end connected to a PHP back end.</li>
+<li>Created and managed APIs and databases.</li></ul></div>
+<div class="row"><div><h3>Web Development Intern</h3><div class="d">06/2024 – 07/2024<br>Technext Solutions, India</div></div>
+<ul><li>Turned Figma designs into pixel-perfect, responsive web pages.</li>
+<li>Tested across browsers and kept the code clean and fast.</li></ul></div>
+</section>
+
+<section id="projects" class="proj">
+<h2>Selected work</h2>
+<!-- Add a link to each project once the client has agreed, for example: <a href="https://example.com">View site</a> -->
+<div class="row"><div><h3>Custom WordPress themes and plugins</h3><p class="d">10–12 client websites at PBM Infotech</p>
+<p>Themes and plugins written in PHP and JavaScript, with ACF fields that give each client a simple editing screen.</p></div></div>
+<div class="row"><div><h3>WooCommerce shops with Razorpay checkout</h3><p class="d">Online payments for client stores</p>
+<p>Product pages, carts and a secure Razorpay payment flow, tested on phones and desktops.</p></div></div>
+<div class="row"><div><h3>Vue.js and PHP application</h3><p class="d">Internship project at Technext Solutions</p>
+<p>A single-page front end in Vue.js talking to a PHP API and a SQL database.</p></div></div>
+<div class="row"><div><h3>Figma-to-web builds</h3><p class="d">Internship project at Technext Solutions</p>
+<p>Design files converted into fast, accessible pages that match the layout exactly.</p></div></div>
+<p class="note">Live links and code samples are available on request.</p>
+</section>
+
+<section id="skills" class="skills">
+<h2>Skills</h2>
+<div class="row"><h3>Languages</h3><div><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">SQL</span></div></div>
+<div class="row"><h3>CMS and frameworks</h3><div><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Advanced Custom Fields</span><span class="tag">Vue.js</span></div></div>
+<div class="row"><h3>Tools and methods</h3><div><span class="tag">REST APIs</span><span class="tag">MySQL</span><span class="tag">Figma</span><span class="tag">SEO</span><span class="tag">Performance optimisation</span><span class="tag">Website security</span></div></div>
+<div class="row"><h3>Languages spoken</h3><div><span class="tag">English B2 (IELTS)</span><span class="tag">German A1, learning</span><span class="tag">Hindi, fluent</span><span class="tag">Gujarati, native</span></div></div>
+</section>
+
+<section id="education">
+<h2>Education and training</h2>
+<div class="row"><div><h3>M.Sc. Industrial Artificial Intelligence</h3><div class="d">10/2026 – present</div></div><p>Hochschule Albstadt-Sigmaringen, Germany</p></div>
+<div class="row"><div><h3>B.E. Information Technology</h3><div class="d">10/2021 – 05/2025</div></div><p>Gujarat Technological University, India</p></div>
+<div class="row"><div><h3>Training</h3></div><ul><li>Software Development with Cloud Computing, 100 hours, Edunet Foundation with TCS and Microsoft.</li><li>Finishing School in Soft Skills and English, 80 hours, Knowledge Consortium of Gujarat.</li></ul></div>
+</section>
+
+<section id="contact" class="contact">
+<h2>Let’s talk</h2>
+<p>I’m open to Werkstudent roles in web and full-stack development in Baden-Württemberg. Write to me and I’ll reply quickly.</p>
+<p><a href="mailto:nihalnpatel@gmail.com">nihalnpatel@gmail.com</a> · <a href="https://www.linkedin.com/in/nihalnpatel">linkedin.com/in/nihalnpatel</a></p>
+</section>
+<footer>© 2026 Nihal Patel · Sigmaringen, Germany</footer>
+</div>
+<script>
+(function(){var r=document.documentElement;try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s)}catch(e){}
+document.getElementById('theme').addEventListener('click',function(){
+var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+var n=dark?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}})})();
+</script>
+</body>
+</html>
