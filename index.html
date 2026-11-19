@@ -10,66 +10,113 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F4E9E'/%3E%3Ctext x='32' y='43' font-size='32' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='white'%3ENP%3C/text%3E%3C/svg%3E">
 <style>
-:root{--bg:#fff;--ink:#000;--muted:#333;--blue:#1F4E9E;--line:#c9d6ee;--soft:#eef3fc;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;color-scheme:dark}
+:root{--bg:#fff;--ink:#000;--muted:#333;--blue:#1F4E9E;--line:#c9d6ee;--soft:#eef3fc;--code:#000;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;--code:#0b1730;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--ink:#fff;--muted:#c4cde0;--blue:#7fb0ff;--line:#22407a;--soft:#0b1730;--code:#0b1730;color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
 a{color:var(--blue)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .wrap{max-width:960px;margin:0 auto;padding:0 24px}
-nav{display:flex;gap:20px;align-items:center;padding:20px 0;flex-wrap:wrap}
-nav a{text-decoration:none;color:var(--ink);font-weight:600}
-nav a:hover{color:var(--blue)}
+#bar{position:fixed;top:0;left:0;right:0;height:4px;background:var(--blue);transform:scaleX(0);transform-origin:left;z-index:30}
+.navbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;gap:22px;align-items:center;padding:14px 24px;flex-wrap:wrap}
+nav a{text-decoration:none;color:var(--ink);font-weight:600;position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+nav a:hover::after{transform:scaleX(1)}
 nav .sp{flex:1}
-button.t{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+button.t{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;transition:background .2s}
+button.t:hover{background:var(--soft)}
 h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.15;margin:0}
-.hero{display:grid;grid-template-columns:1fr 180px;gap:40px;align-items:center;padding:56px 0 40px}
+.hero{position:relative;display:grid;grid-template-columns:1fr 250px;gap:40px;align-items:center;padding:64px 0 40px}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.28;background:var(--blue);z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:340px;height:340px;right:-60px;top:20px}.b2{width:240px;height:240px;left:-80px;bottom:-40px;animation-delay:-6s;opacity:.18}
+@keyframes drift{to{transform:translate(40px,-30px) scale(1.15)}}
 h1{font-size:clamp(3rem,9vw,5.6rem);color:var(--blue);letter-spacing:-.02em}
-.lead{font-size:1.3rem;margin:18px 0 0;max-width:34em}
-.photo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid var(--blue)}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-block;padding:12px 22px;border-radius:6px;border:2px solid var(--blue);font-weight:700;text-decoration:none}
+.role{font-size:1.35rem;font-weight:700;margin:10px 0 0}
+#rot{color:var(--blue);display:inline-block;transition:opacity .3s,transform .3s}
+#rot.out{opacity:0;transform:translateY(8px)}
+.lead{font-size:1.2rem;margin:14px 0 0;max-width:34em;color:var(--muted)}
+.pw{position:relative;width:250px;height:250px}
+.photo{position:absolute;inset:30px;width:190px;height:190px;border-radius:50%;object-fit:cover;border:4px solid var(--blue)}
+.ring{position:absolute;inset:0;animation:spin 28s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chip{position:absolute;padding:5px 12px;border-radius:999px;background:var(--blue);color:var(--bg);font:700 13px ui-monospace,Menlo,Consolas,monospace;animation:bob 4s ease-in-out infinite alternate}
+.c1{top:6px;right:-4px}.c2{bottom:30px;left:-14px;animation-delay:-1.5s}.c3{bottom:-2px;right:20px;animation-delay:-3s}
+@keyframes bob{to{transform:translateY(-10px)}}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;border:2px solid var(--blue);font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px -8px var(--blue)}
 .btn.p{background:var(--blue);color:var(--bg)}
-.path{display:flex;gap:0;margin:8px 0 0;padding:0;list-style:none;border-top:3px solid var(--blue)}
+.tick{overflow:hidden;border-block:1px solid var(--line);padding:12px 0;margin:8px 0 0;background:var(--soft)}
+.tick div{display:flex;gap:36px;width:max-content;animation:run 30s linear infinite;font:700 15px ui-monospace,Menlo,Consolas,monospace;color:var(--blue)}
+.tick:hover div{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-50%)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:44px 0 4px;text-align:center}
+.stat b{display:block;font:700 3rem/1 Georgia,serif;color:var(--blue)}
+.stat span{color:var(--muted);font-size:.95rem}
+.path{display:flex;margin:28px 0 0;padding:0;list-style:none;border-top:3px solid var(--blue)}
 .path li{flex:1;padding:14px 16px 14px 0;position:relative}
-.path li::before{content:"";position:absolute;top:-9px;left:0;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
+.path li::before{content:"";position:absolute;top:-10px;left:0;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
 .path b{display:block;margin-top:10px;color:var(--blue)}
 .path span{color:var(--muted);font-size:.95rem}
-section{padding:56px 0 8px}
-h2{font-size:2rem;color:var(--blue);margin-bottom:22px}
+section{padding:56px 0 8px;scroll-margin-top:60px}
+h2{font-size:2rem;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:14px}
+h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--line),transparent)}
 p{margin:0 0 14px;max-width:42em}
-.row{display:grid;grid-template-columns:190px 1fr;gap:8px 32px;padding:20px 0;border-top:1px solid var(--line)}
+.about{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start}
+.win{background:var(--code);border:1px solid var(--blue);border-radius:10px;overflow:hidden;box-shadow:0 18px 40px -22px var(--blue);font:13.5px/1.7 ui-monospace,Menlo,Consolas,monospace;color:#e8efff}
+.win i{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid #22407a}
+.win i s{width:10px;height:10px;border-radius:50%;background:#7fb0ff;opacity:.7}
+.win pre{margin:0;padding:14px 16px;white-space:pre-wrap}
+.win .l{display:block;opacity:0}
+.in .win .l,.win.in .l{animation:line .4s forwards}
+@keyframes line{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.k{color:#7fb0ff}.s{color:#b9d4ff}
+.row{display:grid;grid-template-columns:200px 1fr;gap:8px 32px;padding:20px 12px;border-top:1px solid var(--line);position:relative;transition:background .25s}
+.row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);transform:scaleY(0);transition:transform .3s}
+.row:hover{background:var(--soft)}.row:hover::before{transform:scaleY(1)}
 .row h3{font-size:1.15rem}
-.row .d{color:var(--muted);font-size:.95rem}
-.row ul{margin:6px 0 0;padding-left:20px}
-.row li{margin:3px 0}
-.skills .row{padding:14px 0}
-.tag{display:inline-block;margin:0 8px 6px 0;padding:3px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-size:.92rem}
-.proj .row{grid-template-columns:1fr}
-.proj h3{margin-bottom:4px}
+.d{color:var(--muted);font-size:.95rem}
+.row ul{margin:6px 0 0;padding-left:20px}.row li{margin:3px 0}
+.skills .row{padding:14px 12px}
+.tag{display:inline-block;margin:0 8px 6px 0;padding:3px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-size:.92rem;transition:transform .2s,background .2s,color .2s}
+.tag:hover{transform:translateY(-3px);background:var(--blue);color:var(--bg)}
+.proj .row{grid-template-columns:64px 1fr;align-items:start}
+.ic{width:52px;height:52px;border-radius:14px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;color:var(--blue);transition:transform .3s,background .3s,color .3s}
+.ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.row:hover .ic{transform:rotate(-8deg) scale(1.1);background:var(--blue);color:var(--bg)}
+.proj h3{margin-bottom:2px}.proj p{margin:6px 0 0}
 .note{color:var(--muted);font-size:.95rem;margin-top:16px}
-.contact{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:32px;margin:56px 0 0}
-.contact h2{margin-bottom:10px}
+.contact{position:relative;overflow:hidden;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:36px;margin:56px 0 0}
+.contact::after{content:"</>";position:absolute;right:20px;bottom:-24px;font:700 120px ui-monospace,monospace;color:var(--blue);opacity:.12}
+.contact h2::after{display:none}
 footer{padding:36px 0 48px;color:var(--muted);font-size:.9rem}
-@media (max-width:700px){
-.hero{grid-template-columns:1fr;padding-top:24px}.photo{order:-1;width:130px;height:130px}
-.row{grid-template-columns:1fr}.path{flex-direction:column;border-top:0;border-left:3px solid var(--blue)}
-.path li{padding:0 0 18px 22px}.path li::before{top:2px;left:-10px}.path b{margin-top:0}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@media (max-width:760px){
+.hero{grid-template-columns:1fr;padding-top:28px}.pw{order:-1;margin:0 auto}
+.about{grid-template-columns:1fr}.row{grid-template-columns:1fr}.proj .row{grid-template-columns:64px 1fr}
+.stats{grid-template-columns:repeat(2,1fr)}
+.path{flex-direction:column;border-top:0;border-left:3px solid var(--blue)}
+.path li{padding:0 0 18px 22px}.path li::before{top:2px;left:-11px}.path b{margin-top:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.win .l{opacity:1}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<nav aria-label="Main">
-<a href="#about">About</a><a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+<div id="bar" aria-hidden="true"></div>
+<div class="navbar"><nav aria-label="Main">
+<a href="#about">About</a><a href="#work">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
 <span class="sp"></span><button class="t" id="theme" type="button" aria-label="Switch colour theme">Dark / light</button>
-</nav>
+</nav></div>
 
+<div class="wrap">
 <header class="hero">
+<div class="blob b1"></div><div class="blob b2"></div>
 <div>
 <h1>Nihal Patel</h1>
+<p class="role">Web developer who is also a <span id="rot">WordPress specialist</span></p>
 <p class="lead">I build fast, responsive WordPress and WooCommerce websites, and I’m now studying Industrial AI in Germany to build smarter ones.</p>
 <div class="cta">
 <a class="btn p" href="mailto:nihalnpatel@gmail.com">Email me</a>
@@ -77,66 +124,90 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:.9rem}
 <a class="btn" href="assets/Nihal_Patel_CV.docx" download>Download CV</a>
 </div>
 </div>
-<img class="photo" src="assets/photo.png" alt="Portrait of Nihal Patel" width="180" height="180">
+<div class="pw">
+<svg class="ring" viewBox="0 0 250 250" aria-hidden="true"><circle cx="125" cy="125" r="118" fill="none" stroke="var(--blue)" stroke-width="2" stroke-dasharray="3 10" stroke-linecap="round"/></svg>
+<img class="photo" src="assets/photo.png" alt="Portrait of Nihal Patel" width="190" height="190">
+<span class="chip c1">PHP</span><span class="chip c2">WP</span><span class="chip c3">Vue.js</span>
+</div>
 </header>
+</div>
 
-<ol class="path" aria-label="Career path">
+<div class="tick" aria-hidden="true"><div>
+<span>WordPress</span><span>PHP</span><span>WooCommerce</span><span>Vue.js</span><span>JavaScript</span><span>REST APIs</span><span>MySQL</span><span>ACF</span><span>Figma</span><span>SEO</span>
+<span>WordPress</span><span>PHP</span><span>WooCommerce</span><span>Vue.js</span><span>JavaScript</span><span>REST APIs</span><span>MySQL</span><span>ACF</span><span>Figma</span><span>SEO</span>
+</div></div>
+
+<div class="wrap">
+<div class="stats rv">
+<div class="stat"><b><i data-to="10">10</i>+</b><span>client projects</span></div>
+<div class="stat"><b><i data-to="1">1</i>+</b><span>years in industry</span></div>
+<div class="stat"><b><i data-to="3">3</i></b><span>developer roles</span></div>
+<div class="stat"><b><i data-to="4">4</i></b><span>languages spoken</span></div>
+</div>
+
+<ol class="path rv" aria-label="Career path">
 <li><b>2024</b><span>Web development intern<br>Technext Solutions</span></li>
 <li><b>2025</b><span>WordPress developer<br>PBM Infotech</span></li>
 <li><b>2026</b><span>M.Sc. Industrial AI<br>Hochschule Albstadt-Sigmaringen</span></li>
 </ol>
 
 <section id="about">
-<h2>About</h2>
+<h2 class="rv">About</h2>
+<div class="about">
+<div class="rv">
 <p>I’m a web developer with over a year of professional experience in WordPress and PHP, and a B.E. in Information Technology from Gujarat Technological University. I have built custom themes and plugins, WooCommerce shops with payment integration, and a Vue.js and PHP application with its own API and database.</p>
 <p>I moved to Sigmaringen in 2026 to study for an M.Sc. in Industrial Artificial Intelligence. I’m looking for a working-student (Werkstudent) role as a Web or Full-Stack Developer in Baden-Württemberg, with full-time availability during semester breaks.</p>
+</div>
+<div class="win rv" style="--d:.15s" aria-hidden="true"><i><s></s><s></s><s></s></i>
+<pre><span class="l" style="animation-delay:.3s"><span class="k">const</span> nihal = {</span><span class="l" style="animation-delay:.6s">  role: <span class="s">"Web / Full-Stack Dev"</span>,</span><span class="l" style="animation-delay:.9s">  stack: [<span class="s">"WordPress"</span>, <span class="s">"PHP"</span>, <span class="s">"Vue.js"</span>],</span><span class="l" style="animation-delay:1.2s">  studying: <span class="s">"M.Sc. Industrial AI"</span>,</span><span class="l" style="animation-delay:1.5s">  basedIn: <span class="s">"Sigmaringen, DE"</span>,</span><span class="l" style="animation-delay:1.8s">  seeking: <span class="s">"Werkstudent role"</span></span><span class="l" style="animation-delay:2.1s">};</span></pre></div>
+</div>
 </section>
 
 <section id="work">
-<h2>Experience</h2>
-<div class="row"><div><h3>WordPress Developer</h3><div class="d">04/2025 – 04/2026<br>PBM Infotech, India</div></div>
+<h2 class="rv">Experience</h2>
+<div class="row rv"><div><h3>WordPress Developer</h3><div class="d">04/2025 – 04/2026<br>PBM Infotech, India</div></div>
 <ul><li>Delivered 10–12 client projects with custom WordPress themes and plugins.</li>
 <li>Built WooCommerce shops and integrated the Razorpay payment gateway.</li>
 <li>Structured content with Advanced Custom Fields so clients can edit their own sites.</li>
 <li>Optimised performance and SEO, and kept sites secure and up to date.</li></ul></div>
-<div class="row"><div><h3>Full-Stack Development Intern</h3><div class="d">01/2025 – 04/2025<br>Technext Solutions, India</div></div>
+<div class="row rv"><div><h3>Full-Stack Development Intern</h3><div class="d">01/2025 – 04/2025<br>Technext Solutions, India</div></div>
 <ul><li>Built a Vue.js front end connected to a PHP back end.</li>
 <li>Created and managed APIs and databases.</li></ul></div>
-<div class="row"><div><h3>Web Development Intern</h3><div class="d">06/2024 – 07/2024<br>Technext Solutions, India</div></div>
+<div class="row rv"><div><h3>Web Development Intern</h3><div class="d">06/2024 – 07/2024<br>Technext Solutions, India</div></div>
 <ul><li>Turned Figma designs into pixel-perfect, responsive web pages.</li>
 <li>Tested across browsers and kept the code clean and fast.</li></ul></div>
 </section>
 
 <section id="projects" class="proj">
-<h2>Selected work</h2>
+<h2 class="rv">Selected work</h2>
 <!-- Add a link to each project once the client has agreed, for example: <a href="https://example.com">View site</a> -->
-<div class="row"><div><h3>Custom WordPress themes and plugins</h3><p class="d">10–12 client websites at PBM Infotech</p>
+<div class="row rv"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><h3>Custom WordPress themes and plugins</h3><div class="d">10–12 client websites at PBM Infotech</div>
 <p>Themes and plugins written in PHP and JavaScript, with ACF fields that give each client a simple editing screen.</p></div></div>
-<div class="row"><div><h3>WooCommerce shops with Razorpay checkout</h3><p class="d">Online payments for client stores</p>
+<div class="row rv"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H6"/></svg></div><div><h3>WooCommerce shops with Razorpay checkout</h3><div class="d">Online payments for client stores</div>
 <p>Product pages, carts and a secure Razorpay payment flow, tested on phones and desktops.</p></div></div>
-<div class="row"><div><h3>Vue.js and PHP application</h3><p class="d">Internship project at Technext Solutions</p>
+<div class="row rv"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div><div><h3>Vue.js and PHP application</h3><div class="d">Internship project at Technext Solutions</div>
 <p>A single-page front end in Vue.js talking to a PHP API and a SQL database.</p></div></div>
-<div class="row"><div><h3>Figma-to-web builds</h3><p class="d">Internship project at Technext Solutions</p>
+<div class="row rv"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div><h3>Figma-to-web builds</h3><div class="d">Internship project at Technext Solutions</div>
 <p>Design files converted into fast, accessible pages that match the layout exactly.</p></div></div>
 <p class="note">Live links and code samples are available on request.</p>
 </section>
 
 <section id="skills" class="skills">
-<h2>Skills</h2>
-<div class="row"><h3>Languages</h3><div><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">SQL</span></div></div>
-<div class="row"><h3>CMS and frameworks</h3><div><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Advanced Custom Fields</span><span class="tag">Vue.js</span></div></div>
-<div class="row"><h3>Tools and methods</h3><div><span class="tag">REST APIs</span><span class="tag">MySQL</span><span class="tag">Figma</span><span class="tag">SEO</span><span class="tag">Performance optimisation</span><span class="tag">Website security</span></div></div>
-<div class="row"><h3>Languages spoken</h3><div><span class="tag">English B2 (IELTS)</span><span class="tag">German A1, learning</span><span class="tag">Hindi, fluent</span><span class="tag">Gujarati, native</span></div></div>
+<h2 class="rv">Skills</h2>
+<div class="row rv"><h3>Languages</h3><div><span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">SQL</span></div></div>
+<div class="row rv"><h3>CMS and frameworks</h3><div><span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Advanced Custom Fields</span><span class="tag">Vue.js</span></div></div>
+<div class="row rv"><h3>Tools and methods</h3><div><span class="tag">REST APIs</span><span class="tag">MySQL</span><span class="tag">Figma</span><span class="tag">SEO</span><span class="tag">Performance optimisation</span><span class="tag">Website security</span></div></div>
+<div class="row rv"><h3>Languages spoken</h3><div><span class="tag">English B2 (IELTS)</span><span class="tag">German A1, learning</span><span class="tag">Hindi, fluent</span><span class="tag">Gujarati, native</span></div></div>
 </section>
 
 <section id="education">
-<h2>Education and training</h2>
-<div class="row"><div><h3>M.Sc. Industrial Artificial Intelligence</h3><div class="d">10/2026 – present</div></div><p>Hochschule Albstadt-Sigmaringen, Germany</p></div>
-<div class="row"><div><h3>B.E. Information Technology</h3><div class="d">10/2021 – 05/2025</div></div><p>Gujarat Technological University, India</p></div>
-<div class="row"><div><h3>Training</h3></div><ul><li>Software Development with Cloud Computing, 100 hours, Edunet Foundation with TCS and Microsoft.</li><li>Finishing School in Soft Skills and English, 80 hours, Knowledge Consortium of Gujarat.</li></ul></div>
+<h2 class="rv">Education and training</h2>
+<div class="row rv"><div><h3>M.Sc. Industrial Artificial Intelligence</h3><div class="d">10/2026 – present</div></div><p>Hochschule Albstadt-Sigmaringen, Germany</p></div>
+<div class="row rv"><div><h3>B.E. Information Technology</h3><div class="d">10/2021 – 05/2025</div></div><p>Gujarat Technological University, India</p></div>
+<div class="row rv"><div><h3>Training</h3></div><ul><li>Software Development with Cloud Computing, 100 hours, Edunet Foundation with TCS and Microsoft.</li><li>Finishing School in Soft Skills and English, 80 hours, Knowledge Consortium of Gujarat.</li></ul></div>
 </section>
 
-<section id="contact" class="contact">
+<section id="contact" class="contact rv">
 <h2>Let’s talk</h2>
 <p>I’m open to Werkstudent roles in web and full-stack development in Baden-Württemberg. Write to me and I’ll reply quickly.</p>
 <p><a href="mailto:nihalnpatel@gmail.com">nihalnpatel@gmail.com</a> · <a href="https://www.linkedin.com/in/nihalnpatel">linkedin.com/in/nihalnpatel</a></p>
@@ -144,10 +215,29 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:.9rem}
 <footer>© 2026 Nihal Patel · Sigmaringen, Germany</footer>
 </div>
 <script>
-(function(){var r=document.documentElement;try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s)}catch(e){}
-document.getElementById('theme').addEventListener('click',function(){
-var dark=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-var n=dark?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}})})();
+(function(){
+var d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+r.classList.add('js');
+try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s)}catch(e){}
+d.getElementById('theme').addEventListener('click',function(){
+var cur=r.getAttribute('data-theme'),dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches,n=dark?'light':'dark';
+r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}});
+var bar=d.getElementById('bar');
+function sc(){var h=r.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+addEventListener('scroll',sc,{passive:true});sc();
+var els=d.querySelectorAll('.rv');
+if(rm||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+els.forEach(function(e,i){if(!e.style.getPropertyValue('--d'))e.style.setProperty('--d',((i%3)*0.08)+'s')});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+if(e.target.classList.contains('stats'))count(e.target)}})},{threshold:.15});
+els.forEach(function(e){io.observe(e)});
+function count(box){box.querySelectorAll('i[data-to]').forEach(function(el){
+var to=+el.dataset.to,t0=null;el.textContent='0';
+function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1200);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}
+requestAnimationFrame(f)})}
+var rot=d.getElementById('rot'),w=['WordPress specialist','WooCommerce builder','Full-Stack developer','Industrial AI student'],k=0;
+setInterval(function(){rot.classList.add('out');setTimeout(function(){k=(k+1)%w.length;rot.textContent=w[k];rot.classList.remove('out')},320)},2600);
+})();
 </script>
 </body>
 </html>
