@@ -2,7 +2,7 @@
 
 Personal portfolio of Nihal Patel, Web / Full-Stack Developer (WordPress, PHP, WooCommerce) and M.Sc. Industrial AI student in Germany.
 
-Live site: `https://YOUR-USERNAME.github.io`
+Live site: `https://YOUR-USERNAME.github.io](https://patelnihal61.github.io/nihalpatel.github.io/`
 
 ## Files
 - `index.html` – the whole site (no build step, no dependencies)
